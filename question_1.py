@@ -11,14 +11,13 @@ class PracticeImage:
         # The pixels can either be on (using #) or off (using empty space).
 
         # The class should use private member variables for the symbol and pixels,
-        self._pixel_status = False
         self._pixel_symbol = "#"
         self._output_string = ""
         self._flipped_values = [[] for i in range(self._grid_size)]
         self._flipped_output_string = ""
         self._flopped_values = [[] for i in range(self._grid_size)]
         self._flopped_output_string = ""
-
+        self._incoming_pixel_values = [[] for i in range(self._grid_size)]
 
     # getters and setters for the pixels and symbol,
     @property
@@ -32,47 +31,56 @@ class PracticeImage:
                 Returns:
                     size and symbol for the pixels
         """
-        #print("Getting the pixels info")
-        # print(
-        #    f"Pixel values are: {self._pixel_values}, Pixel status is {self._pixel_status} & pixel symbol is {self._pixel_symbol}")
-        # print(f"Grid size is {self._grid_size}")
-        return self._pixel_values, self._pixel_status, self._pixel_symbol, self._grid_size
+        # print("Getting the pixels info") print( f"Pixel values are: {self._pixel_values}, Pixel status is {
+        # self._pixel_status} & pixel symbol is {self._pixel_symbol}") print(f"Grid size is {self._grid_size}")
+
+        return self._pixel_values, self._pixel_symbol, self._grid_size
 
     @pixel_info.setter
     def pixel_info(self, value: tuple) -> None:
         """
-            Sets the symbol fon the pixels
+            Sets the symbol for the pixels
 
                 Parameters:
-                    value: Tuple passed from the main funciton are the pixel number and symbol
+                    value: Tuple passed from the main function are the pixel position and symbol
 
                 Returns:
                     None
         """
-        #print("Setting the pixels attributes")
+        # print("Setting the pixels attributes")
         xPos, yPos, symbol = value
         self._pixel_values[xPos][yPos] = symbol
 
     # along with an output function
-    def output_image(self):
+    def output_image(self, incoming_array=None):
         """
             Converts the pixel values stored in the image object to string and returns the string
 
                 Parameters:
-                    None
+                    Incoming array passing by previous function
 
                 Returns:
                     Output image in str format readable on the console.
         """
-        for i in range(self._grid_size):
-            for j in range (self._grid_size):
-                self._output_string += str(self._pixel_values[i][j])
-            self._output_string += "\n"
+        if incoming_array is None:
+            self._output_string = ""
+            for i in range(self._grid_size):
+                for j in range(self._grid_size):
+                    self._output_string += str(self._pixel_values[i][j])
+                self._output_string += "\n"
 
-        return self._output_string
+            return self._output_string
+        elif incoming_array is not None:
+            self._output_string = ""
+            self._incoming_pixel_values = incoming_array
+            for i in range(self._grid_size):
+                for j in range(self._grid_size):
+                    self._output_string += str(self._incoming_pixel_values[i][j])
+                self._output_string += "\n"
 
-    # and two image manipulation functions;
-    # flip (horizontal mirror) and flop (vertical mirror).
+            return self._output_string
+
+    # and two image manipulation functions; flip (horizontal mirror) and flop (vertical mirror).
     def flip(self) -> str:
         """
             Make a horizontal mirror of the pixel values referenced in the image object.
@@ -85,15 +93,7 @@ class PracticeImage:
                     without affecting the original pixel values.
         """
         self._flipped_values = self._pixel_values[::-1]
-        # print("Manual horizontal flip")
-        # print(self._flipped_values)
-
-        for i in range(self._grid_size):
-            for j in range (self._grid_size):
-                self._flipped_output_string += str(self._flipped_values[i][j])
-            self._flipped_output_string += "\n"
-
-        return self._flipped_output_string
+        return self.output_image(self._flipped_values)
 
     def flop(self) -> str:
         """
@@ -108,22 +108,12 @@ class PracticeImage:
         """
         # result = [x[::-1] for x in myl]
         self._flopped_values = [x[::-1] for x in self._pixel_values]
-
-        # print("Manual Vertical flop")
-        # print(self._flopped_values)
-
-        for i in range(self._grid_size):
-            for j in range(self._grid_size):
-                self._flopped_output_string += str(self._flopped_values[i][j])
-            self._flopped_output_string += "\n"
-
-        return self._flopped_output_string
-
+        return self.output_image(self._flopped_values)
 
     # as well as a fill function which should fill the image with empty pixels.
     def fill(self):
         """
-            Fill the entire pixel array with black spaces as a way to clear all pixel values
+             Fills the image with empty pixels as a way to clear all pixel values
 
                 Parameters:
                     None
@@ -133,8 +123,9 @@ class PracticeImage:
         """
         for list in self._pixel_values:
             for i in range(self._grid_size):
-                list.append(' ')
+                list.append('-')
 
+# Can you implement a child class called Triangle that draws a right angle triangle?
 class Triangle(PracticeImage):
     # child class called Triangle that draws a right angle triangle
 
@@ -143,42 +134,37 @@ class Triangle(PracticeImage):
         self._triangle_output_string = ""
 
     def draw_right_angle_triangle(self, symbol):
+        """
+             Draws a right-angled triangle on a 10x10 grid using the symbol passed from the main function
 
+                Parameters:
+                    The symbol which will be filled in the pixel values to create a right-angled triangle
+
+                Returns:
+                    Putput image of the triangle in str format readable on the console
+        """
         for i in range(self._grid_size):
             self._pixel_values[i][0] = symbol
             for j in range(self._grid_size):
-                self._pixel_values[self._grid_size-1][j] = symbol
+                self._pixel_values[self._grid_size - 1][j] = symbol
                 if i == j:
                     self._pixel_values[i][j] = symbol
+        return self.output_image()
 
-        for i in range(self._grid_size):
-            for j in range(self._grid_size):
-                self._triangle_output_string += str(self._pixel_values[i][j])
-            self._triangle_output_string += "\n"
-
-        return self._triangle_output_string
-
-        pass
 
 def main():
     # Initializing the image object
     image_object = PracticeImage()
-    #print(type(image_object))
+    # print(type(image_object))
     image_object.fill()
-    # Gets the pixels & symbols
-    #print("First get")
-    #print(image_object.pixel_info)
-
-    # As a test, output an empty image
-    #print(image_object.output_image())
-    # getting_image_info = image_object.pixel_info
 
     # Calling first setter function to set pixel values and symbol
-    image_object.pixel_info = (0,0,'#')
-    # Gets the pixels & symbols
-    # print("Second get")
-    print(image_object.pixel_info)
-    print("Output image:")
+    # Test the object by setting the first pixel at position 0,0 with the flip/flop functions.
+    image_object.pixel_info = (0, 0, '#')
+    # Calling the getter which gets the pixels & symbols
+    # print("Testing get function ")
+    # print(image_object.pixel_info)
+    print("Testing the object by setting the first pixel at position 0,0 with the flip/flop functions:")
     print(image_object.output_image())
     flipped_output = image_object.flip()
     print('Flipped output image')
@@ -191,6 +177,8 @@ def main():
     # Making right angled triangle
 
     right_angled_triangle = Triangle()
+
+    # Overload the fill() function and test it with flip/flop functions from the base class.
     right_angled_triangle.fill()
 
     # As a test, output an empty image
@@ -203,17 +191,11 @@ def main():
     print(right_angled_triangle.flop())
 
 
-
-
-
-
-
-
 # main entry point to the program
 if __name__ == "__main__":
     main()
 
-# Test the object by setting the first pixel at position 0,0 with the flip/flop functions.
 
-# Can you implement a child class called Triangle that draws a right angle triangle?
-# Overload the fill() function and test it with flip/flop functions from the base class.
+
+
+

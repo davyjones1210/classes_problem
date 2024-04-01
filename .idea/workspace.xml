@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03d49329-2b78-4dd9-852f-e0c71534542b" name="Changes" comment="Saving work by end of day">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/question_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/question_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_question_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_question_1.py" afterDir="false" />
     </list>
@@ -35,16 +34,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests in test_question_1.py.executor": "Run",
-    "Python.question_1.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Davy Jones/PycharmProjects/Practice_Getters_Setters"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests in test_question_1.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.question_1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Davy Jones/PycharmProjects/Practice_Getters_Setters&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

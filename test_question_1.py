@@ -44,6 +44,7 @@ class TestPixels(unittest.TestCase):
         image_string = test_image_object.output_image()
         self.assertEqual(len(image_string), 110)
 
+    # python -m unittest test_question_1.TestPixels.test_flip_method_works
     def test_flip_method_works(self):
         test_numpy_string = ""
         test_image_object = PracticeImage()
@@ -76,6 +77,7 @@ class TestPixels(unittest.TestCase):
         # print(test_numpy_string)
         self.assertEqual(flipped_test_image, test_numpy_string)
 
+    # python -m unittest test_question_1.TestPixels.test_flop_method_works
     def test_flop_method_works(self):
         test_numpy_string = ""
         test_image_object = PracticeImage()
@@ -108,10 +110,12 @@ class TestPixels(unittest.TestCase):
         # print(test_numpy_string)
         self.assertEqual(flopped_test_image, test_numpy_string)
 
+    # python -m unittest test_question_1.TestPixels.test_if_triangle_variables_are_initialized_correctly
     def test_if_triangle_variables_are_initialized_correctly(self):
         test_right_angled_triangle = Triangle()
         self.assertEqual(test_right_angled_triangle._triangle_output_string, '')
 
+    # python -m unittest test_question_1.TestPixels.test_draw_right_angle_triangle_works
     def test_draw_right_angle_triangle_works(self):
         test_right_angled_triangle = Triangle()
         test_right_angled_triangle.fill()
@@ -123,12 +127,6 @@ class TestPixels(unittest.TestCase):
         self.assertEqual(test_output_triangle, sample_triangle_image)
 
 
-    def test_main_function(self):
-
-        pass
-
-    def test_first_pixel_exists(self):
-        pass
 
     if __name__ == "__main__":
         unittest.main()
