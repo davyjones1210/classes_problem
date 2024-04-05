@@ -2,6 +2,8 @@ from question_1 import PracticeImage
 from question_1 import Triangle
 import unittest
 import numpy as np
+import io
+import sys
 
 # pytest test_question_1.py --cov-report term-missing --cov -v
 sample_triangle_image = """#         
@@ -41,8 +43,10 @@ class TestPixels(unittest.TestCase):
     def test_if_output_image_returns_10x10_image(self):
         test_image_object = PracticeImage()
         test_image_object.fill()
-        image_string = test_image_object.output_image()
-        self.assertEqual(len(image_string), 110)
+        test_image_object.output_image()
+        test_case_string = test_image_object._output_string
+        test_case_length = len(test_case_string)
+        self.assertEqual(test_case_length, 110)
 
     # python -m unittest test_question_1.TestPixels.test_flip_method_works
     def test_flip_method_works(self):
@@ -51,15 +55,17 @@ class TestPixels(unittest.TestCase):
         test_image_object.fill()
         test_getting_image_info = test_image_object.pixel_info
         test_image_object.pixel_info = (0, 0, '#')
-        flipped_test_image = test_image_object.flip()
 
+        test_image_object.flip()
+        test_image_object.output_image()
+        flipped_test_image = test_image_object._output_string
         numpy_flipped_image = np.flip(test_getting_image_info[0], 0)
         # new_numpy_image = list(map(int, numpy_flipped_image))
         # print("Manual image")
         # print(test_getting_image_info[0])
 
         # print("Manual string")
-        test_output_string = test_image_object.output_image()
+        # test_output_string = test_image_object.output_image()
         # print(test_output_string)
 
         # print("Manual flipped string")
@@ -84,7 +90,9 @@ class TestPixels(unittest.TestCase):
         test_image_object.fill()
         test_getting_image_info = test_image_object.pixel_info
         test_image_object.pixel_info = (0, 0, '#')
-        flopped_test_image = test_image_object.flop()
+        test_image_object.flop()
+        test_image_object.output_image()
+        flopped_test_image = test_image_object._output_string
         # myl_flip_v = np.flip(myl,1) # vertical flip
         numpy_flopped_image = np.flip(test_getting_image_info[0], 1)
         # new_numpy_image = list(map(int, numpy_flopped_image))
@@ -92,7 +100,7 @@ class TestPixels(unittest.TestCase):
         # print(test_getting_image_info[0])
 
         # print("Manual string")
-        test_output_string = test_image_object.output_image()
+        # test_output_string =
         # print(test_output_string)
 
         # print("Manual flopped string")
@@ -119,14 +127,13 @@ class TestPixels(unittest.TestCase):
     def test_draw_right_angle_triangle_works(self):
         test_right_angled_triangle = Triangle()
         test_right_angled_triangle.fill()
-        test_output_triangle = test_right_angled_triangle.draw_right_angle_triangle('#')
+        test_right_angled_triangle.draw_right_angle_triangle('#')
+        test_output_triangle = test_right_angled_triangle._output_string
         # print("Test output of triangle")
         # print(test_output_triangle)
         # print('Sample triangle image')
         # print(sample_triangle_image)
         self.assertEqual(test_output_triangle, sample_triangle_image)
-
-
 
     if __name__ == "__main__":
         unittest.main()
